@@ -32,16 +32,40 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    #django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    #rest_framework
+    'rest_framework',
+    #rest_framework_simplejwt
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+    #dj_rest_auth
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    #allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     #Apps
     'api_v1',
-    'apps.users',
+    'apps_v1.users',
 ]
+#sites
+SITE_ID = 1
+
+#dj_rest_auth
+REST_AUTH = {
+    'TOKEN_MODEL':None,
+    'USE_JWT': True,
+    'JWT_AUTH_COOKIE': 'access-token',
+    'JWT_AUTH_REFRESH_COOKIE': 'refresh-token',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,6 +75,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'

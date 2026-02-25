@@ -59,12 +59,36 @@ INSTALLED_APPS = [
 #sites
 SITE_ID = 1
 
+# DRF
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
 #dj_rest_auth
 REST_AUTH = {
     'TOKEN_MODEL':None,
     'USE_JWT': True,
     'JWT_AUTH_COOKIE': 'access-token',
     'JWT_AUTH_REFRESH_COOKIE': 'refresh-token',
+}
+
+#Oauth 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': config('ID_CLIENT'),
+            'secret': config('CLIENT_SECRET'),
+        },
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
 }
 
 MIDDLEWARE = [
